@@ -10,6 +10,10 @@ use Shippinno\Labs\Infrastructure\Domain\Model\User\Auth0UserRepository;
 
 class Auth0UserRepositoryTest extends TestCase
 {
+    public function testSkip()
+    {
+        $this->markTestSkipped();
+    }
 //    public function testItReturnsUserOfId()
 //    {
 //        $userId = new UserId('google-oauth2|103940066570414158309');

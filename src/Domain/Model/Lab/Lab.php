@@ -48,9 +48,9 @@ class Lab
     private $image;
 
     /**
-     * @var Enrollment[]
+     * @var Member[]
      */
-    private $enrollments;
+    private $members;
 
     /**
      * @var Session[]
@@ -82,7 +82,7 @@ class Lab
         $this->overview = $overview;
         $this->capacity = $capacity;
         $this->image = $image;
-        $this->enrollments = new ArrayCollection;
+        $this->members = new ArrayCollection;
         $this->sessions = new ArrayCollection;
     }
 
@@ -184,11 +184,11 @@ class Lab
     }
 
     /**
-     * @return Enrollment[]
+     * @return Member[]
      */
-    public function enrollments(): Collection
+    public function members(): Collection
     {
-        return $this->enrollments;
+        return $this->members;
     }
 
     /**
@@ -204,7 +204,7 @@ class Lab
      */
     public function isFull(): bool
     {
-        return count($this->enrollments) === $this->capacity();
+        return count($this->members) === $this->capacity();
     }
 
     /**
@@ -273,52 +273,62 @@ class Lab
         throw new SessionNotFoundException;
     }
 
-    public function addAttendanceToSession(SessionId $sessionId, UserId $learnerId, DateTimeImmutable $now): void
-    {
-        if (!$this->enrolledLearner($learnerId)) {
-            // error
-        }
-
-        /** @var Session $session */
-        $session = $this->sessions()->filter(
-            function (Session $session) use ($sessionId) {
-                return $session->sessionId()->equals($sessionId);
-            }
-        )->last();
-
-        $session->addAttendance($learnerId, $now);
-    }
-
-    public function enrolledLearner(UserId $learnerId): bool
-    {
-        return $this->enrollments()->exists(function (int $i, Enrollment $enrollment) use ($learnerId) {
-            return $enrollment->learnerId()->equals($learnerId);
-        });
-    }
-
     /**
-     * @param UserId $learnerId
-     * @param DateTimeImmutable $now
-     * @throws CourseAlreadyFullException
+     * @param UserId $userId
+     * @param DateTimeImmutable $memberSince
+     * @throws CourseFullException
      */
-    public function addEnrollment(UserId $learnerId, DateTimeImmutable $now): void
+    public function addMember(User $user, DateTimeImmutable $memberSince): void
     {
         if ($this->isFull()) {
-            throw new CourseAlreadyFullException;
+            throw new CourseFullException;
         }
 
-        $this->enrollments->add(new Enrollment($learnerId, $now));
+        $this->members->add(new Member($user->userId(), $memberSince));
     }
 
     /**
-     * @param User $learner
+     * @param User $user
+     * @return bool
      */
-    public function cancel(Enrollment $enrollment)
+    public function isMember(User $user): bool
     {
-        foreach ($this->enrollments() as $i => $enrollment) {
-            if ($enrollment->learnerId()->equals($learner->userId())) {
-                unset($this->enrollments[$i]);
+        return $this->members()->exists(
+            function (int $i, Member $member) use ($user) {
+                return $member->learnerId()->equals($user->userId());
+            }
+        );
+    }
+
+    /**
+     * @param User $user
+     */
+    public function removeMember(User $user): void
+    {
+        foreach ($this->members() as $i => $member) {
+            if ($member->learnerId()->equals($user->userId())) {
+                $this->members->removeElement($member);
             }
         }
     }
+
+
+
+
+
+//    public function addAttendanceToSession(SessionId $sessionId, UserId $learnerId, DateTimeImmutable $now): void
+//    {
+//        if (!$this->isMember($learnerId)) {
+//            // error
+//        }
+//
+//        /** @var Session $session */
+//        $session = $this->sessions()->filter(
+//            function (Session $session) use ($sessionId) {
+//                return $session->sessionId()->equals($sessionId);
+//            }
+//        )->last();
+//
+//        $session->addAttendance($learnerId, $now);
+//    }
 }

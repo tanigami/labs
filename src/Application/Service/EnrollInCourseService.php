@@ -3,7 +3,7 @@
 namespace Shippinno\Labs\Application\Service;
 
 use DateTimeImmutable;
-use Shippinno\Labs\Domain\Model\Lab\CourseAlreadyFullException;
+use Shippinno\Labs\Domain\Model\Lab\CourseFullException;
 use Shippinno\Labs\Domain\Model\Lab\LabId;
 use Shippinno\Labs\Domain\Model\Lab\LabRepository;
 use Shippinno\Labs\Domain\Model\Lab\EnrollmentRepository;

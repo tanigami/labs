@@ -3,7 +3,7 @@
 namespace Shippinno\Labs\Infrastructure\Domain\Model\Lab;
 
 use Happyr\DoctrineSpecification\EntitySpecificationRepository;
-use Shippinno\Labs\Domain\Model\Lab\Enrollment;
+use Shippinno\Labs\Domain\Model\Lab\Member;
 use Shippinno\Labs\Domain\Model\Lab\EnrollmentRepository;
 
 class DoctrineEnrollmentRepository extends EntitySpecificationRepository implements EnrollmentRepository
@@ -11,7 +11,7 @@ class DoctrineEnrollmentRepository extends EntitySpecificationRepository impleme
     /**
      * {@inheritdoc}
      */
-    public function add(Enrollment $enrollment): void
+    public function add(Member $enrollment): void
     {
         $this->getEntityManager()->persist($enrollment);
     }
@@ -19,7 +19,7 @@ class DoctrineEnrollmentRepository extends EntitySpecificationRepository impleme
     /**
      * {@inheritdoc}
      */
-    public function remove(Enrollment $enrollment): void
+    public function remove(Member $enrollment): void
     {
         $this->getEntityManager()->remove($enrollment);
     }

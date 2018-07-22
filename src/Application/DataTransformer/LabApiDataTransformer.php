@@ -8,7 +8,7 @@ use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
 use League\Fractal\TransformerAbstract;
 use Shippinno\Labs\Domain\Model\Lab\Lab;
-use Shippinno\Labs\Domain\Model\Lab\Enrollment;
+use Shippinno\Labs\Domain\Model\Lab\Member;
 use Shippinno\Labs\Domain\Model\Lab\Session;
 
 class LabApiDataTransformer extends TransformerAbstract implements LabDataTransformer
@@ -56,8 +56,8 @@ class LabApiDataTransformer extends TransformerAbstract implements LabDataTransf
                 'id' => $course->courseId()->id(),
                 'name' => $course->name(),
                 'seats' => $course->seats(),
-                'enrollments' => $course->enrollments()->map(
-                    function (Enrollment $enrollment) {
+                'enrollments' => $course->members()->map(
+                    function (Member $enrollment) {
                         return [
                             'learner_id' => $enrollment->learnerId()->id(),
                             'enrolled_at' => $enrollment->enrolledAt()->format(DateTime::ISO8601),

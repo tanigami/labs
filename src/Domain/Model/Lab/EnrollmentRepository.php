@@ -5,12 +5,12 @@ namespace Shippinno\Labs\Domain\Model\Lab;
 interface EnrollmentRepository
 {
     /**
-     * @param Enrollment $enrollment
+     * @param Member $enrollment
      */
-    public function add(Enrollment $enrollment): void;
+    public function add(Member $enrollment): void;
 
     /**
-     * @param Enrollment $enrollment
+     * @param Member $enrollment
      */
-    public function remove(Enrollment $enrollment): void;
+    public function remove(Member $enrollment): void;
 }

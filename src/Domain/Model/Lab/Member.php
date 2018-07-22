@@ -5,7 +5,7 @@ namespace Shippinno\Labs\Domain\Model\Lab;
 use DateTimeImmutable;
 use Shippinno\Labs\Domain\Model\User\UserId;
 
-class Enrollment
+class Member
 {
     /**
      * @var int
