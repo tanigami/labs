@@ -27,7 +27,7 @@ trait LabRepositoryAware
 
     /**
      * @param LabId $labId
-     * @return null|Lab
+     * @return Lab
      * @throws LabNotFoundException
      */
     protected function findLabOrFail(LabId $labId): Lab

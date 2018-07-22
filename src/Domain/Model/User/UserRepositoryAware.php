@@ -27,7 +27,7 @@ trait UserRepositoryAware
 
     /**
      * @param UserId $userId
-     * @return null|User
+     * @return User
      * @throws UserNotFoundException
      */
     protected function findUserOrFail(UserId $userId): User
