@@ -15,21 +15,21 @@ class Member
     /**
      * @var UserId
      */
-    private $learnerId;
+    private $userId;
 
     /**
      * @var DateTimeImmutable
      */
-    private $enrolledAt;
+    private $memberSince;
 
     /**
-     * @param UserId $learnerId
-     * @param DateTimeImmutable $enrolledAt
+     * @param UserId $userId
+     * @param DateTimeImmutable $memberSince
      */
-    public function __construct(UserId $learnerId, DateTimeImmutable $enrolledAt)
+    public function __construct(UserId $userId, DateTimeImmutable $memberSince)
     {
-        $this->learnerId = $learnerId;
-        $this->enrolledAt = $enrolledAt;
+        $this->userId = $userId;
+        $this->memberSince = $memberSince;
     }
 
     /**
@@ -37,14 +37,14 @@ class Member
      */
     public function learnerId(): UserId
     {
-        return $this->learnerId;
+        return $this->userId;
     }
 
     /**
      * @return DateTimeImmutable
      */
-    public function enrolledAt(): DateTimeImmutable
+    public function memberSince(): DateTimeImmutable
     {
-        return $this->enrolledAt;
+        return $this->memberSince;
     }
 }

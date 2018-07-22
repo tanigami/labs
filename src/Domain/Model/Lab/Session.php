@@ -4,6 +4,8 @@ namespace Shippinno\Labs\Domain\Model\Lab;
 
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Shippinno\Labs\Domain\Model\User\User;
 use Shippinno\Labs\Domain\Model\User\UserId;
 use Tanigami\ValueObjects\Time\TimeRange;
 
@@ -30,9 +32,9 @@ class Session
     private $description;
 
     /**
-     * @var Attendance[]
+     * @var Collection|Attendee[]
      */
-    private $attendances;
+    private $attendees;
 
     /**
      * @param SessionId $sessionId
@@ -50,7 +52,7 @@ class Session
         $this->title = $title;
         $this->hours = $hours;
         $this->description = $description;
-        $this->attendances = new ArrayCollection;
+        $this->attendees = new ArrayCollection;
     }
 
     /**
@@ -117,19 +119,23 @@ class Session
     }
 
     /**
-     * @param UserId $learnerId
-     * @param DateTimeImmutable $now
+     * @param User $user
      */
-    public function addAttendance(UserId $learnerId, DateTimeImmutable $now): void
+    public function addAttendee(User $user): void
     {
-        $this->attendances->add(new Attendance($learnerId, $now));
+        $this->attendees->add(new Attendee($user->userId()));
     }
 
     /**
-     * @return DateTimeImmutable
+     * @param User $user
+     * @return bool
      */
-    protected function now(): DateTimeImmutable
+    public function isAttendee(User $user): bool
     {
-        return new DateTimeImmutable;
+        return $this->attendees->exists(
+            function (int $i, Attendee $attendee) use ($user) {
+                return $attendee->userId()->equals($user->userId());
+            }
+        );
     }
 }

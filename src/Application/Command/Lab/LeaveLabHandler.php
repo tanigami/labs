@@ -2,7 +2,7 @@
 
 namespace Shippinno\Labs\Application\Command\Lab;
 
-use Shippinno\Labs\Domain\Model\Lab\CourseFullException;
+use Shippinno\Labs\Domain\Model\Lab\LabFullException;
 use Shippinno\Labs\Domain\Model\Lab\LabId;
 use Shippinno\Labs\Domain\Model\Lab\LabNotFoundException;
 use Shippinno\Labs\Domain\Model\Lab\LabRepository;
@@ -29,7 +29,7 @@ class LeaveLabHandler
 
     /**
      * @param LeaveLab $command
-     * @throws CourseFullException
+     * @throws LabFullException
      * @throws LabNotFoundException
      * @throws UserNotFoundException
      */

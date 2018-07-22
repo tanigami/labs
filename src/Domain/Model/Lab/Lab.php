@@ -48,12 +48,12 @@ class Lab
     private $image;
 
     /**
-     * @var Member[]
+     * @var Collection|Member[]
      */
     private $members;
 
     /**
-     * @var Session[]
+     * @var Collection|Session[]
      */
     private $sessions;
 
@@ -276,12 +276,12 @@ class Lab
     /**
      * @param UserId $userId
      * @param DateTimeImmutable $memberSince
-     * @throws CourseFullException
+     * @throws LabFullException
      */
     public function addMember(User $user, DateTimeImmutable $memberSince): void
     {
         if ($this->isFull()) {
-            throw new CourseFullException;
+            throw new LabFullException;
         }
 
         $this->members->add(new Member($user->userId(), $memberSince));
@@ -312,23 +312,20 @@ class Lab
         }
     }
 
-
-
-
-
-//    public function addAttendanceToSession(SessionId $sessionId, UserId $learnerId, DateTimeImmutable $now): void
-//    {
-//        if (!$this->isMember($learnerId)) {
-//            // error
-//        }
-//
-//        /** @var Session $session */
-//        $session = $this->sessions()->filter(
-//            function (Session $session) use ($sessionId) {
-//                return $session->sessionId()->equals($sessionId);
-//            }
-//        )->last();
-//
-//        $session->addAttendance($learnerId, $now);
-//    }
+    /**
+     * @param SessionId $sessionId
+     * @param User $user
+     * @throws SessionNotFoundException
+     */
+    public function addSessionAttendee(SessionId $sessionId, User $user): void
+    {
+        if (!$this->isMember($user)) {
+            // error
+        }
+        $session = $this->sessionOfId($sessionId);
+        if (is_null($sessionId)) {
+            throw new SessionNotFoundException;
+        }
+        $session->addAttendee($user);
+    }
 }

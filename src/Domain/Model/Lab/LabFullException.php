@@ -4,6 +4,6 @@ namespace Shippinno\Labs\Domain\Model\Lab;
 
 use Exception;
 
-class CourseFullException extends Exception
+class LabFullException extends Exception
 {
 }

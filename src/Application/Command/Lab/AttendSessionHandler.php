@@ -2,17 +2,15 @@
 
 namespace Shippinno\Labs\Application\Command\Lab;
 
-use Shippinno\Labs\Domain\Model\Lab\LabFullException;
 use Shippinno\Labs\Domain\Model\Lab\LabId;
-use Shippinno\Labs\Domain\Model\Lab\LabNotFoundException;
 use Shippinno\Labs\Domain\Model\Lab\LabRepository;
 use Shippinno\Labs\Domain\Model\Lab\LabRepositoryAware;
+use Shippinno\Labs\Domain\Model\Lab\SessionId;
 use Shippinno\Labs\Domain\Model\User\UserId;
-use Shippinno\Labs\Domain\Model\User\UserNotFoundException;
 use Shippinno\Labs\Domain\Model\User\UserRepository;
 use Shippinno\Labs\Domain\Model\User\UserRepositoryAware;
 
-class JoinLabHandler
+class AttendSessionHandler
 {
     use LabRepositoryAware;
     use UserRepositoryAware;
@@ -28,15 +26,17 @@ class JoinLabHandler
     }
 
     /**
-     * @param JoinLab $command
-     * @throws LabFullException
-     * @throws LabNotFoundException
-     * @throws UserNotFoundException
+     * @param AttendSession $command
+     * @throws \Shippinno\Labs\Domain\Model\Lab\LabNotFoundException
+     * @throws \Shippinno\Labs\Domain\Model\User\UserNotFoundException
      */
-    public function handle(JoinLab $command): void
+    public function handle(AttendSession $command): void
     {
         $lab = $this->findLabOrFail(new LabId($command->labId()));
         $commander = $this->findUserOrFail(new UserId($command->commanderId()));
-        $lab->addMember($commander, new \DateTimeImmutable());
+        $lab->addSessionAttendee(
+            new SessionId($command->sessionId()),
+            $commander
+        );
     }
 }

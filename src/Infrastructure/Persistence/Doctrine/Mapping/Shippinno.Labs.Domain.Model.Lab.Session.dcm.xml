@@ -11,7 +11,7 @@
         <field name="title" column="title"/>
         <embedded name="hours" use-column-prefix="false" class="Tanigami\ValueObjects\Time\TimeRange"/>
         <field name="outline" column="outline" type="text"/>
-        <!--<many-to-many target-entity="Shippinno\Learn\Domain\Model\Course\Attendance" field="attendances" orphan-removal="true">-->
+        <!--<many-to-many target-entity="Shippinno\Learn\Domain\Model\Course\Attendee" field="attendances" orphan-removal="true">-->
             <!--<cascade><cascade-all/></cascade>-->
             <!--<join-table name="session_attendances">-->
                 <!--<join-columns>-->
