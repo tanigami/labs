@@ -7,6 +7,5 @@
             table="attendees">
         <id name="surrogateId" column="id" type="integer"><generator/></id>
         <field name="userId" column="user_id" type="user_id"/>
-        <field name="attendedAt" column="attended_at" type="datetime_immutable"/>
     </entity>
 </doctrine-mapping>

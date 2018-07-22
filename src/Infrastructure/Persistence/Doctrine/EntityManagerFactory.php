@@ -9,6 +9,7 @@ use Doctrine\ORM\Tools\Setup;
 use Shippinno\Labs\Infrastructure\Persistence\Doctrine\Type\EntityId\DoctrineLabId;
 use Shippinno\Labs\Infrastructure\Persistence\Doctrine\Type\EntityId\DoctrineSessionId;
 use Shippinno\Labs\Infrastructure\Persistence\Doctrine\Type\EntityId\DoctrineUserId;
+use Shippinno\Labs\Infrastructure\Persistence\Doctrine\Type\ValueObject\UrlType;
 
 class EntityManagerFactory
 {
@@ -23,6 +24,7 @@ class EntityManagerFactory
         Type::addType('lab_id', DoctrineLabId::class);
         Type::addType('session_id', DoctrineSessionId::class);
         Type::addType('user_id', DoctrineUserId::class);
+        Type::addType('url', UrlType::class);
 
         return EntityManager::create(
             $conn,
