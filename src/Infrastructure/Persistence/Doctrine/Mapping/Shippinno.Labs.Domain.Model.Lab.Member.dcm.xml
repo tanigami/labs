@@ -3,10 +3,10 @@
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                           http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
-    <entity name="Shippinno\Labs\Domain\Model\Lab\Enrollment"
+    <entity name="Shippinno\Labs\Domain\Model\Lab\Member"
             table="enrollments">
         <id name="surrogateId" column="id" type="integer"><generator/></id>
-        <field name="learnerId" column="learner_id" type="user_id"/>
-        <field name="enrolledAt" column="enrolled_at" type="datetime_immutable"/>
+        <field name="userId" column="user_id" type="user_id"/>
+        <field name="memberSince" column="member_since" type="datetime_immutable"/>
     </entity>
 </doctrine-mapping>

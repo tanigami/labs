@@ -16,14 +16,6 @@ class InMemoryLabRepository implements LabRepository
     /**
      * {@inheritdoc}
      */
-    public function all(): array
-    {
-        return $this->labs;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function labOfId(LabId $labId): ?Lab
     {
         return $this->labs[$labId->id()] ?? null;
@@ -35,6 +27,14 @@ class InMemoryLabRepository implements LabRepository
     public function add(Lab $lab): void
     {
         $this->labs[$lab->labId()->id()] = $lab;
+    }
+
+    /**
+     * @param Lab $lab
+     */
+    public function remove(Lab $lab): void
+    {
+        unset($this->labs[$lab->labId()->id()]);
     }
 
     /**
@@ -52,13 +52,5 @@ class InMemoryLabRepository implements LabRepository
     public function countSatisfying($specification): int
     {
         // TODO: Implement countSatisfying() method.
-    }
-
-    /**
-     * @param Lab $lab
-     */
-    public function remove(Lab $lab): void
-    {
-        unset($this->labs[$lab->labId()->id()]);
     }
 }

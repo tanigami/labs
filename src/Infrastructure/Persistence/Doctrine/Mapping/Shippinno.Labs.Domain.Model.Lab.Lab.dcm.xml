@@ -12,30 +12,33 @@
         <field name="subject" column="subject"/>
         <field name="overview" column="overview" type="text"/>
         <field name="capacity" column="capacity" type="integer"/>
-        <!--<many-to-many target-entity="Shippinno\Learn\Domain\Model\Course\Enrollment" field="enrollments" orphan-removal="true">-->
-            <!--&lt;!&ndash;<cascade><cascade-all/></cascade>&ndash;&gt;-->
-            <!--<join-table name="course_enrollments">-->
-                <!--<join-columns>-->
-                    <!--<join-column name="course_id"/>-->
-                <!--</join-columns>-->
-                <!--<inverse-join-columns>-->
-                    <!--<join-column name="enrollment_id" unique="true"/>-->
-                <!--</inverse-join-columns>-->
-            <!--</join-table>-->
-        <!--</many-to-many>-->
-        <!--<many-to-many target-entity="Shippinno\Learn\Domain\Model\Course\Session" field="sessions" orphan-removal="true">-->
-            <!--<cascade><cascade-all/></cascade>-->
-            <!--<join-table name="course_sessions">-->
-                <!--<join-columns>-->
-                    <!--<join-column name="course_id"/>-->
-                <!--</join-columns>-->
-                <!--<inverse-join-columns>-->
-                    <!--<join-column name="session_id" unique="true" on-delete="CASCADE"/>-->
-                <!--</inverse-join-columns>-->
-            <!--</join-table>-->
-            <!--<order-by>-->
-                <!--<order-by-field name="hours.start" direction="ASC"/>-->
-            <!--</order-by>-->
-        <!--</many-to-many>-->
+        <many-to-many target-entity="Shippinno\Labs\Domain\Model\Lab\Member" field="members" orphan-removal="true">
+            <cascade><cascade-all/></cascade>
+            <join-table name="lab_members">
+                <join-columns>
+                    <join-column name="lab_id"/>
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="member_id" unique="true" on-delete="CASCADE"/>
+                </inverse-join-columns>
+            </join-table>
+            <order-by>
+                <order-by-field name="memberSince" direction="ASC"/>
+            </order-by>
+        </many-to-many>
+        <many-to-many target-entity="Shippinno\Labs\Domain\Model\Lab\Session" field="sessions" orphan-removal="true">
+            <cascade><cascade-all/></cascade>
+            <join-table name="lab_sessions">
+                <join-columns>
+                    <join-column name="lab_id"/>
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="session_id" unique="true" on-delete="CASCADE"/>
+                </inverse-join-columns>
+            </join-table>
+            <order-by>
+                <order-by-field name="hours.start" direction="ASC"/>
+            </order-by>
+        </many-to-many>
     </entity>
 </doctrine-mapping>

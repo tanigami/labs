@@ -7,20 +7,19 @@
             table="sessions"
             repository-class="Shippinno\Labs\Infrastructure\Domain\Model\Lab\DoctrineSessionRepository">
         <id name="sessionId" column="id" type="session_id"/>
-        <field name="labId" column="lab_id" type="lab_id"/>
         <field name="title" column="title"/>
         <embedded name="hours" use-column-prefix="false" class="Tanigami\ValueObjects\Time\TimeRange"/>
-        <field name="outline" column="outline" type="text"/>
-        <!--<many-to-many target-entity="Shippinno\Learn\Domain\Model\Course\Attendee" field="attendances" orphan-removal="true">-->
-            <!--<cascade><cascade-all/></cascade>-->
-            <!--<join-table name="session_attendances">-->
-                <!--<join-columns>-->
-                    <!--<join-column name="session_id"/>-->
-                <!--</join-columns>-->
-                <!--<inverse-join-columns>-->
-                    <!--<join-column name="attendance_id" unique="true"/>-->
-                <!--</inverse-join-columns>-->
-            <!--</join-table>-->
-        <!--</many-to-many>-->
+        <field name="description" column="description" type="text"/>
+        <many-to-many target-entity="Shippinno\Labs\Domain\Model\Lab\Attendee" field="attendees" orphan-removal="true">
+            <cascade><cascade-all/></cascade>
+            <join-table name="session_attendees">
+                <join-columns>
+                    <join-column name="session_id"/>
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="attendee_id" unique="true" on-delete="CASCADE"/>
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
     </entity>
 </doctrine-mapping>

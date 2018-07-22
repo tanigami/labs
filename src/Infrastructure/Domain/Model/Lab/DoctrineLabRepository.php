@@ -18,20 +18,29 @@ class DoctrineLabRepository extends EntitySpecificationRepository implements Lab
     /**
      * {@inheritdoc}
      */
-    public function all(): array
-    {
-        return $this->findAll();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function labOfId(LabId $labId): ?Lab
     {
         /** @var Lab|null $course */
         $course = $this->find($labId);
 
         return $course;
+    }
+
+    /**
+     * {@inheritdoc}
+     * @throws \Doctrine\ORM\ORMException
+     */
+    public function add(Lab $lab): void
+    {
+        $this->getEntityManager()->persist($lab);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function remove(Lab $lab): void
+    {
+        $this->getEntityManager()->remove($lab);
     }
 
     /**
@@ -63,22 +72,5 @@ class DoctrineLabRepository extends EntitySpecificationRepository implements Lab
         $specification = Spec::countOf($specification);
 
         return $this->satisfying($specification)[0][1];
-    }
-
-    /**
-     * {@inheritdoc}
-     * @throws \Doctrine\ORM\ORMException
-     */
-    public function add(Lab $lab): void
-    {
-        $this->getEntityManager()->persist($lab);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function remove(Lab $lab): void
-    {
-        $this->getEntityManager()->remove($lab);
     }
 }
