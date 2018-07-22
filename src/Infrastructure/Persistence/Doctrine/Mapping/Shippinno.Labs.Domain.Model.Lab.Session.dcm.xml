@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+    <entity name="Shippinno\Labs\Domain\Model\Lab\Session"
+            table="sessions"
+            repository-class="Shippinno\Labs\Infrastructure\Domain\Model\Lab\DoctrineSessionRepository">
+        <id name="sessionId" column="id" type="session_id"/>
+        <field name="labId" column="lab_id" type="lab_id"/>
+        <field name="title" column="title"/>
+        <embedded name="hours" use-column-prefix="false" class="Tanigami\ValueObjects\Time\TimeRange"/>
+        <field name="outline" column="outline" type="text"/>
+        <!--<many-to-many target-entity="Shippinno\Learn\Domain\Model\Course\Attendance" field="attendances" orphan-removal="true">-->
+            <!--<cascade><cascade-all/></cascade>-->
+            <!--<join-table name="session_attendances">-->
+                <!--<join-columns>-->
+                    <!--<join-column name="session_id"/>-->
+                <!--</join-columns>-->
+                <!--<inverse-join-columns>-->
+                    <!--<join-column name="attendance_id" unique="true"/>-->
+                <!--</inverse-join-columns>-->
+            <!--</join-table>-->
+        <!--</many-to-many>-->
+    </entity>
+</doctrine-mapping>
