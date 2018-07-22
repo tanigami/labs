@@ -19,7 +19,6 @@ class Attendee
 
     /**
      * @param UserId $learnerId
-     * @param DateTimeImmutable $attendedAt
      */
     public function __construct(UserId $learnerId)
     {
