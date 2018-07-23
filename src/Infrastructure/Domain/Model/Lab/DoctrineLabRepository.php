@@ -5,7 +5,7 @@ namespace Shippinno\Labs\Infrastructure\Domain\Model\Lab;
 use Doctrine\ORM\EntityRepository;
 use Happyr\DoctrineSpecification\EntitySpecificationRepository;
 use Happyr\DoctrineSpecification\Spec;
-use Shippinno\Labs\Application\Query\CourseOrdering;
+use Shippinno\Labs\Application\Query\LabOrdering;
 use Shippinno\Labs\Application\Query\Limiting;
 use Shippinno\Labs\Domain\Model\Lab\Lab;
 use Shippinno\Labs\Domain\Model\Lab\LabId;
@@ -46,22 +46,31 @@ class DoctrineLabRepository extends EntitySpecificationRepository implements Lab
     /**
      * @return Lab[]
      */
-    public function satisfying($specification, CourseOrdering $ordering = null, Limiting $limiting = null): array
+    public function satisfying($specification, LabOrdering $ordering = null, Limiting $limiting = null): array
     {
         if (!is_null($ordering)) {
             switch ($ordering->orderBy()) {
-                case CourseOrdering::ORDER_BY_NAME:
+                case LabOrdering::ORDER_BY_NAME:
                     $field = 'name';
                     break;
             }
             $specification = $specification->and(new OrderBySpecification($field, $ordering->direction()));
         }
 
+        $labs = $this->match($specification);
+
+        $labs = array_filter(
+            $labs,
+            function (Lab $lab) use ($specification) {
+                return $specification->isSatisfiedBy($lab);
+            }
+        );
+
         if (!is_null($limiting)) {
-            $specification = $specification->and(new LimitSpecification($limiting->limit()));
+            $labs = array_slice($labs, 0, $limiting->limit());
         }
 
-        return $this->match($specification);
+        return $labs;
     }
 
     /**

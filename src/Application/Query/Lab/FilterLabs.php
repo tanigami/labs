@@ -4,7 +4,7 @@ namespace Shippinno\Labs\Application\Query\Lab;
 
 use Doctrine\Common\Collections\Expr\Comparison;
 use Doctrine\Common\Collections\Expr\Expression;
-use Shippinno\Labs\Application\Query\CourseOrdering;
+use Shippinno\Labs\Application\Query\LabOrdering;
 use Shippinno\Labs\Application\Query\Limiting;
 
 class FilterLabs
@@ -15,7 +15,7 @@ class FilterLabs
     private $expression;
 
     /**
-     * @var null|CourseOrdering
+     * @var null|LabOrdering
      */
     private $ordering;
 
@@ -26,10 +26,10 @@ class FilterLabs
 
     /**
      * @param Expression $expression
-     * @param CourseOrdering|null $ordering
+     * @param LabOrdering|null $ordering
      * @param Limiting|null $limiting
      */
-    public function __construct(Expression $expression, CourseOrdering $ordering = null, Limiting $limiting = null)
+    public function __construct(Expression $expression, LabOrdering $ordering = null, Limiting $limiting = null)
     {
         $this->expression = $expression;
         $this->ordering = $ordering;
@@ -45,9 +45,9 @@ class FilterLabs
     }
 
     /**
-     * @return null|CourseOrdering
+     * @return null|LabOrdering
      */
-    public function ordering(): ?CourseOrdering
+    public function ordering(): ?LabOrdering
     {
         return $this->ordering;
     }

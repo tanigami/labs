@@ -5,7 +5,7 @@ namespace Shippinno\Labs\Application\Query\Lab;
 use Closure;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\Comparison;
-use Shippinno\Labs\Application\DataTransformer\LabDataTransformer;
+use Shippinno\Labs\Application\DataTransformer\Lab\LabDataTransformer;
 use Shippinno\Labs\Domain\Model\Common\AnyOfSpecification;
 use Shippinno\Labs\Domain\Model\Common\Specification;
 use Shippinno\Labs\Domain\Model\Lab\Lab;

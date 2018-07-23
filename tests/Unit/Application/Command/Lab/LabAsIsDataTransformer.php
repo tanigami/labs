@@ -2,7 +2,7 @@
 
 namespace Shippinno\Labs\Tests\Unit\Application\Command\Lab;
 
-use Shippinno\Labs\Application\DataTransformer\LabDataTransformer;
+use Shippinno\Labs\Application\DataTransformer\Lab\LabDataTransformer;
 use Shippinno\Labs\Domain\Model\Lab\Lab;
 
 class LabAsIsDataTransformer implements LabDataTransformer

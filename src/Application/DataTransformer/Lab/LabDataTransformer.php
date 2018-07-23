@@ -1,6 +1,6 @@
 <?php
 
-namespace Shippinno\Labs\Application\DataTransformer;
+namespace Shippinno\Labs\Application\DataTransformer\Lab;
 
 use Shippinno\Labs\Domain\Model\Lab\Lab;
 

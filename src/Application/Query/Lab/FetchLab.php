@@ -1,8 +1,8 @@
 <?php
 
-namespace Shippinno\Labs\Application\Query;
+namespace Shippinno\Labs\Application\Query\Lab;
 
-class OneLab implements Query
+class FetchLab
 {
     /**
      * @var string

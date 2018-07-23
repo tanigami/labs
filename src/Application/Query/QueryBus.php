@@ -7,45 +7,33 @@ use Verraes\ClassFunctions\ClassFunctions;
 class QueryBus
 {
     /**
-     * @var QueryHandler[]
+     * @var array
      */
     private $queryHandlers = [];
 
     /**
-     * @param Query $query
+     * @param mixed $query
      * @return mixed
+     * @throws MissingQueryHandlerException
      */
-    public function handle(Query $query)
+    public function handle($query)
     {
         $underscoredQueryClass = ClassFunctions::underscore($query);
-
-//        if (!isset($this->queryHandlers[$anUnderscoredQueryClass])) {
-//            throw new HandlerNotFoundException(get_class($aQuery));
-//        }
-
+        if (!isset($this->queryHandlers[$underscoredQueryClass])) {
+            throw new MissingQueryHandlerException(get_class($query));
+        }
         $queryHandler = $this->queryHandlers[$underscoredQueryClass];
 
         return $queryHandler->handle($query);
     }
 
     /**
-     * @param QueryHandler $queryHandler
+     * @param mixed $queryHandler
      */
-    public function register(QueryHandler $queryHandler): void
+    public function register($queryHandler): void
     {
         $underscoredQueryHandlerClass = ClassFunctions::underscore($queryHandler);
-        $queryClass = str_replace(
-            [
-                '.handler',
-                '_handler'
-            ],
-            [
-                '',
-                ''
-            ],
-            $underscoredQueryHandlerClass
-        );
-
+        $queryClass = str_replace(['.handler', '_handler'], ['', ''], $underscoredQueryHandlerClass);
         $this->queryHandlers[$queryClass] = $queryHandler;
     }
 }
