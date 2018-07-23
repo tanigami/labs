@@ -1,5 +1,5 @@
 {
-    "name": "shippinno/learn",
+    "name": "shippinno/labs",
     "type": "project",
     "autoload": {
         "psr-4": {
