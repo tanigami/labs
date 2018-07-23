@@ -8,7 +8,7 @@ use Shippinno\Labs\Application\Command\Lab\JoinLabHandler;
 use Shippinno\Labs\Domain\Model\User\UserBuilder;
 use Shippinno\Labs\Infrastructure\Domain\Model\Lab\InMemoryLabRepository;
 use Shippinno\Labs\Infrastructure\Domain\Model\User\InMemoryUserRepository;
-use Shippinno\Labs\Tests\Unit\Application\Service\Lab\LabBuilder;
+use Shippinno\Labs\Tests\Unit\Application\Command\Lab\LabBuilder;
 
 class JoinLabHandlerTest extends TestCase
 {

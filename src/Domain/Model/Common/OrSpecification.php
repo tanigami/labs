@@ -4,7 +4,7 @@ namespace Shippinno\Labs\Domain\Model\Common;
 
 use Happyr\DoctrineSpecification\Spec;
 
-class AndSpecification extends Specification
+class OrSpecification extends Specification
 {
     /**
      * @var Specification
@@ -30,15 +30,13 @@ class AndSpecification extends Specification
     /**
      * {@inheritdoc}
      */
-    public function isSatisfiedBy($object): bool
+    public function isSatisfiedBy($entity): bool
     {
-        return $this->one->isSatisfiedBy($object) && $this->other->isSatisfiedBy($object);
+        return $this->one->isSatisfiedBy($entity) || $this->other->isSatisfiedBy($entity);
     }
 
     protected function getSpec()
     {
-        return Spec::andX(
-            $this->one, $this->other
-        );
+        return Spec::orX($this->one, $this->other);
     }
 }

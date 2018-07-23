@@ -16,6 +16,23 @@ abstract class Specification extends BaseSpecification
     }
 
     /**
+     * @param Specification $other
+     * @return OrSpecification
+     */
+    public function or(Specification $other): OrSpecification
+    {
+        return new OrSpecification($this, $other);
+    }
+
+    /**
+     * @return NotSpecification
+     */
+    public function not(): NotSpecification
+    {
+        return new NotSpecification($this);
+    }
+
+    /**
      * @param mixed $entity
      * @return bool
      */

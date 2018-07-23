@@ -208,6 +208,14 @@ class Lab
     }
 
     /**
+     * @return bool
+     */
+    public function isOpenToJoin(): bool
+    {
+        return !$this->isFull();
+    }
+
+    /**
      * @param SessionId $sessionId
      * @param string $title
      * @param TimeRange $hours

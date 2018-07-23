@@ -2,6 +2,7 @@
 
 namespace Shippinno\Labs\Infrastructure\Domain\Model\Lab;
 
+use Shippinno\Labs\Domain\Model\Common\Specification;
 use Shippinno\Labs\Domain\Model\Lab\Lab;
 use Shippinno\Labs\Domain\Model\Lab\LabId;
 use Shippinno\Labs\Domain\Model\Lab\LabRepository;
@@ -40,9 +41,15 @@ class InMemoryLabRepository implements LabRepository
     /**
      * @return Lab[]
      */
-    public function satisfying($specification): array
+    public function satisfying(Specification $specification): array
     {
-        // TODO: Implement satisfying() method.
+
+        return array_filter(
+            $this->labs,
+            function (Lab $lab) use ($specification) {
+                return $specification->isSatisfiedBy($lab);
+            }
+        );
     }
 
     /**
@@ -51,6 +58,6 @@ class InMemoryLabRepository implements LabRepository
      */
     public function countSatisfying($specification): int
     {
-        // TODO: Implement countSatisfying() method.
+        return count($this->satisfying($specification));
     }
 }

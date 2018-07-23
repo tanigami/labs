@@ -2,6 +2,8 @@
 
 namespace Shippinno\Labs\Domain\Model\Lab;
 
+use Shippinno\Labs\Domain\Model\Common\Specification;
+
 interface LabRepository
 {
     /**
@@ -23,11 +25,11 @@ interface LabRepository
     /**
      * @return Lab[]
      */
-    public function satisfying($specification): array;
+    public function satisfying(Specification $specification): array;
 
     /**
      * @param $specification
      * @return int
      */
-    public function countSatisfying($specification): int;
+    public function countSatisfying(Specification $specification): int;
 }

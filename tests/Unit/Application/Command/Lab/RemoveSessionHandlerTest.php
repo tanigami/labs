@@ -10,7 +10,7 @@ use Shippinno\Labs\Domain\Model\Lab\SessionId;
 use Shippinno\Labs\Domain\Model\User\UserBuilder;
 use Shippinno\Labs\Infrastructure\Domain\Model\Lab\InMemoryLabRepository;
 use Shippinno\Labs\Infrastructure\Domain\Model\User\InMemoryUserRepository;
-use Shippinno\Labs\Tests\Unit\Application\Service\Lab\LabBuilder;
+use Shippinno\Labs\Tests\Unit\Application\Command\Lab\LabBuilder;
 use Tanigami\ValueObjects\Time\TimeRange;
 
 class RemoveSessionHandlerTest extends TestCase

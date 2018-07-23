@@ -3,9 +3,9 @@
 namespace Shippinno\Labs\Infrastructure\Domain\Model\Lab;
 
 use Happyr\DoctrineSpecification\Spec;
-use Shippinno\Labs\Domain\Model\Lab\CourseNameContainsSpecification;
+use Shippinno\Labs\Domain\Model\Lab\LabNameContainsSpecification;
 
-class DoctrineCourseNameContainsSpecification extends CourseNameContainsSpecification
+class DoctrineLabNameContainsSpecification extends LabNameContainsSpecification
 {
     /**
      * {@inheritdoc}

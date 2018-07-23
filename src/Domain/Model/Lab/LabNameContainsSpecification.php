@@ -11,7 +11,7 @@ namespace Shippinno\Labs\Domain\Model\Lab;
 
 use Shippinno\Labs\Domain\Model\Common\Specification;
 
-class CourseNameContainsSpecification extends Specification
+class LabNameContainsSpecification extends Specification
 {
     /**
      * @var string
@@ -28,11 +28,11 @@ class CourseNameContainsSpecification extends Specification
     }
 
     /**
-     * @param Lab $entity
+     * @param Lab $lab
      * @return bool
      */
-    public function isSatisfiedBy($course): bool
+    public function isSatisfiedBy($lab): bool
     {
-        return strpos($course->name(), $this->string) !== false;
+        return strpos($lab->name(), $this->string) !== false;
     }
 }

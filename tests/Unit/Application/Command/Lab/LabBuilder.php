@@ -1,6 +1,6 @@
 <?php
 
-namespace Shippinno\Labs\Tests\Unit\Application\Service\Lab;
+namespace Shippinno\Labs\Tests\Unit\Application\Command\Lab;
 
 use Shippinno\Labs\Domain\Model\Lab\Lab;
 use Shippinno\Labs\Domain\Model\Lab\LabId;
